@@ -29,6 +29,7 @@ public class one {
                 System.out.print(tem1[i][j]+" ");
             }
         }
+          System.out.println("测试结束");
 
     }
 
