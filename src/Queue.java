@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/**
+ * 队列的三个数值num（数值数量），front（队列头坐标），rear（队列尾坐标）相互独立
+ * num空则无法删除，num满贼无法添加
+ * 每当移除，front头坐标置0，坐标向后移一位，位移到坐标尾后移到坐标头
+ * 每当添加数值时，rear向后移一位，并且将值放入
+ */
 public class Queue {
 
     public static void main(String[] args) {
