@@ -14,12 +14,17 @@ public class one {
         HeroNode h2=new HeroNode(2,"卢俊义","玉麒麟");
         HeroNode h3=new HeroNode(3,"吴用","智多星");
         HeroNode h4=new HeroNode(4,"林冲","豹子头");
+        HeroNode h5=new HeroNode(0,"小鱼人","无敌");
         LinkList linkList=new LinkList();
         linkList.list();
-        linkList.add(h1);
-        linkList.add(h2);
-        linkList.add(h3);
-        linkList.add(h4);
+        linkList.addByOder(h4);
+        linkList.addByOder(h5);
+        linkList.addByOder(h2);
+        linkList.addByOder(h3);
+        linkList.addByOder(h1);
+        linkList.addByOder(h3);
+        linkList.addByOder(h4);
+        linkList.addByOder(h4);
         linkList.list();
     }
 }
@@ -44,6 +49,38 @@ class LinkList{
             }
 
         }
+    }
+
+    public void addByOder(HeroNode heroNode){
+//        if (headNode.getNext()==null){
+//            headNode.setNext(heroNode);
+//            return;
+//        }
+        boolean loop=false;
+        HeroNode node=headNode;
+        while (true){
+//            第一次进入在链表里添加一个节点后退出
+            if (node.getNext()==null){
+                node.setNext(heroNode);
+                break;
+            }
+            if (node.getNext().getId()>heroNode.getId()){
+                HeroNode tem=node.getNext();
+                node.setNext(heroNode);
+                heroNode.setNext(tem);
+                break;
+            }
+            if (node.getNext().getId()==heroNode.getId()){
+                loop=true;
+                break;
+            }
+            node=node.getNext();
+        }
+        if (loop){
+            System.out.println("已有重复的id，不允许添加");
+        }
+
+
     }
 
     public void add(HeroNode heroNode){
@@ -72,6 +109,14 @@ class HeroNode{
     private String name;
     private String designation;
     private HeroNode next=null;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public HeroNode getNext() {
         return next;
