@@ -28,17 +28,42 @@ public class one {
         linkList.addByOder(h4);
         linkList.addByOder(h4);
         linkList.list();
-        linkList.updata(h6);
-        linkList.updata(h7);
-        linkList.list();
-        System.out.println("开始删除");
-        linkList.delete(4);
+//        linkList.updata(h6);
+//        linkList.updata(h7);
+//        linkList.list();
+//        System.out.println("开始删除");
+//        linkList.delete(4);
+        System.out.println("OrderByDESC");
+        linkList.byDesc();
         linkList.list();
     }
 }
 
 class LinkList{
     private HeroNode headNode=new HeroNode(0,null,null);
+//    倒叙排列
+    public void byDesc(){
+        HeroNode head=new HeroNode(-1,"","");
+        HeroNode tem;
+        while (true){
+            if (headNode.getNext()==null){
+                break;
+            }
+            tem=headNode.getNext();
+            headNode.setNext(headNode.getNext().getNext());
+            if (head.getNext()==null){
+                tem.setNext(null);
+                head.setNext(tem);
+            }else {
+                tem.setNext(head.getNext());
+                head.setNext(tem);
+            }
+
+        }
+        if (head.getNext()!=null){
+            headNode.setNext(head.getNext());
+        }
+    }
 
     public void delete(int i){
         if (i<1){
