@@ -14,7 +14,9 @@ public class one {
         HeroNode h2=new HeroNode(2,"卢俊义","玉麒麟");
         HeroNode h3=new HeroNode(3,"吴用","智多星");
         HeroNode h4=new HeroNode(4,"林冲","豹子头");
-        HeroNode h5=new HeroNode(0,"小鱼人","无敌");
+        HeroNode h5=new HeroNode(5,"小鱼人","无敌");
+        HeroNode h6=new HeroNode(5,"滚滚","滚日天");
+        HeroNode h7=new HeroNode(6,"斯拉克","深海");
         LinkList linkList=new LinkList();
         linkList.list();
         linkList.addByOder(h4);
@@ -26,11 +28,63 @@ public class one {
         linkList.addByOder(h4);
         linkList.addByOder(h4);
         linkList.list();
+        linkList.updata(h6);
+        linkList.updata(h7);
+        linkList.list();
+        System.out.println("开始删除");
+        linkList.delete(4);
+        linkList.list();
     }
 }
 
 class LinkList{
     private HeroNode headNode=new HeroNode(0,null,null);
+
+    public void delete(int i){
+        if (i<1){
+            System.out.println("输入错误，删除索引不可小于1");
+            return;
+        }
+        int num=0;
+        boolean anchor=false ;
+        HeroNode heroNode=headNode;
+        while (true){
+            if (heroNode.getNext()==null)
+                break;
+            num++;
+            if (num==i){
+                anchor=true;
+                break;
+            }
+            heroNode=heroNode.getNext();
+        }
+        if (anchor){
+            heroNode.setNext(heroNode.getNext().getNext());
+        }else {
+            System.out.println("删除失败，应该是超过了链表长度");
+        }
+    }
+    //挨个遍历，找到ID相同的，然后修改，没有找到的话不修改
+    public void updata(HeroNode node){
+        boolean anchor=false;
+        HeroNode heroNode=headNode;
+        while (true) {
+            if (heroNode.getNext()==null){
+                break;
+            }
+            if (heroNode.getNext().getId()==node.getId()){
+                anchor=true;
+                break;
+            }
+            heroNode=heroNode.getNext();
+        }
+        if (anchor){
+            heroNode.getNext().setName(node.getName());
+            heroNode.getNext().setDesignation(node.getDesignation());
+        }else{
+            System.out.println("没有元素无法修改");
+        }
+    }
 
     public void list(){
         HeroNode heroNode1=headNode.getNext();
@@ -50,7 +104,7 @@ class LinkList{
 
         }
     }
-
+//第一次直接插入节点，第二次以后开始每次插入都挨次比较，当链表内的元素大于插入元素时，将元素插到节点前一个
     public void addByOder(HeroNode heroNode){
 //        if (headNode.getNext()==null){
 //            headNode.setNext(heroNode);
@@ -82,7 +136,7 @@ class LinkList{
 
 
     }
-
+//循环遍历到最后一个节点，插入数据
     public void add(HeroNode heroNode){
         if (headNode.getNext()==null){
             headNode.setNext(heroNode);
@@ -109,6 +163,14 @@ class HeroNode{
     private String name;
     private String designation;
     private HeroNode next=null;
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
 
     public int getId() {
         return id;
