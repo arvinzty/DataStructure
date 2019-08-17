@@ -58,24 +58,26 @@ public class one {
 
 //    快速排序实现(交换法)
 //    static public void sort4(int[] s,int left,int right){
-//        if (left>right){{
+//        if (left>right)
 //            return;
-//        }}
-//        int tem=s[0];
-//        while (left!=right){
-//            while (s[right]<=tem & right>left)
-//                right--;
-//            while (s[left]>=tem & left<right)
-//                left++;
-//            if(left<right){
-//                int t=s[left];
-//                s[left]=s[right];
-//                s[right]=t;
+//        int i,j;
+//        i=left+1;
+//        j=right;
+//        int tem=s[left];
+//        while (i!=j){
+//            while (s[j]<=tem && j>i)
+//                j--;
+//            while (s[i]>=tem && j<i)
+//                i++;
+//            if(i<j){
+//                int t=s[i];
+//                s[i]=s[j];
+//                s[j]=t;
 //            }
 //        }
-//        s[0]=s[left];
-//        s[left]=tem;
-//        sort4(s,1,left-1);
+//        s[left]=s[i];
+//        s[i]=tem;
+//        sort4(s,0,left-1);
 //        sort4(s,left+1,s.length-1);
 //    }
 
