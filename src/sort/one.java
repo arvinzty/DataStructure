@@ -5,11 +5,13 @@ package sort;
  * sort1 选择排序
  * sort2 冒泡排序
  * sort3 插入排序
+ * sort4 快速排序 交换法
+ * sort5 快速排序 挖坑法
  */
 public class one {
 
     public static void main(String[] args) {
-        int[] s={7,3,4,5,2,1,8,9,6};
+        int[] s={7,3,4,5,2,1,8,9,6,7,6,4};
         System.out.println("排序前");
         for (int i:s)
             System.out.printf("[%d]",i);
@@ -24,13 +26,58 @@ public class one {
 //        for (int z:tem)
 //            System.out.printf("[%d]",z);
 //        System.out.println();
-        one.sort3(s);
+
+        one.sort5(s,0,s.length-1);
         System.out.println("排序后");
         for (int i:s)
             System.out.printf("[%d]",i);
         System.out.println();
 
+
     }
+
+      public static void sort5(int[] s,int left,int right){
+        if (right<=left)
+            return;
+        int i,j;
+        i=left;
+        j=right;
+        int tem=s[i];
+        while (i<j){
+            while (s[j]>=tem && j>i)
+                j--;
+            s[i]=s[j];
+            while (s[i]<=tem && j>i)
+                i++;
+            s[j]=s[i];
+        }
+        s[i]=tem;
+        sort5(s,left,i-1);
+        sort5(s,i+1,right);
+    }
+
+//    快速排序实现(交换法)
+//    static public void sort4(int[] s,int left,int right){
+//        if (left>right){{
+//            return;
+//        }}
+//        int tem=s[0];
+//        while (left!=right){
+//            while (s[right]<=tem & right>left)
+//                right--;
+//            while (s[left]>=tem & left<right)
+//                left++;
+//            if(left<right){
+//                int t=s[left];
+//                s[left]=s[right];
+//                s[right]=t;
+//            }
+//        }
+//        s[0]=s[left];
+//        s[left]=tem;
+//        sort4(s,1,left-1);
+//        sort4(s,left+1,s.length-1);
+//    }
 
 //    插入排序
     static public void sort3(int[] s){
